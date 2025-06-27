@@ -488,7 +488,7 @@ abstract class rcube_storage
     {
         if ($headers = $this->get_message_headers($uid)) {
             return rcube_charset::convert($this->get_message_part($uid, $part, null),
-                $headers->charset ?: $this->default_charset);
+                (isset($headers->charset) && $headers->charset) ? $headers->charset : $this->default_charset);
         }
 
         return false;
